@@ -1,12 +1,20 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
+        stage('Compile') {
             steps {
-                echo 'Building...'
+                bat 'javac Hello.java'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: '*.class'
             }
         }
     }
+
     post {
         success {
             echo 'Build Successful!'
